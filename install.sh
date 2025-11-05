@@ -41,4 +41,26 @@
           sudo mv "$TMP_FILE" "$INSTALL_DIR/$BINARY_NAME"
           sudo chmod +x "$INSTALL_DIR/$BINARY_NAME"
 
+          # Download libwasmvm
+          WASMVM_REPO="CosmWasm/wasmvm"
+          WASMVM_TAG="${WASMVM_TAG:-v2.1.4}"
+
+          case "$OS/$ARCH" in
+            linux/amd64)  LIB_ASSET="libwasmvm.x86_64.so" ;;
+            linux/arm64)  LIB_ASSET="libwasmvm.aarch64.so" ;;
+            darwin/*)     LIB_ASSET="libwasmvm.dylib" ;;
+            *) echo "❌ No libwasmvm asset for $OS/$ARCH"; exit 1 ;;
+          esac
+
+          URL="https://github.com/${WASMVM_REPO}/releases/download/${WASMVM_TAG}/${LIB_ASSET}"
+          echo "→ Downloading ${URL} ..."
+          LIB_TMP="$(mktemp)"
+          curl -sSLf "$URL" -o "$LIB_TMP" || { echo "❌ libwasmvm download failed"; exit 1; }
+
+          INSTALL_DIR_LIB="${INSTALL_DIR_LIB:-/usr/local/lib}"
+          echo "→ Installing ${LIB_ASSET} to ${INSTALL_DIR_LIB} ..."
+          sudo mkdir -p "$INSTALL_DIR_LIB"
+          sudo install -m 0644 "$LIB_TMP" "${INSTALL_DIR_LIB}/$( [[ $OS == darwin ]] && echo libwasmvm.dylib || echo libwasmvm.so )"
+          rm -f "$LIB_TMP"
+
           echo "✓ Successfully installed $($INSTALL_DIR/$BINARY_NAME --version 2>/dev/null || echo "$BINARY_NAME")"
