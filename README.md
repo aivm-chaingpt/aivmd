@@ -1,9 +1,9 @@
 # AIVMD (Public Releases Repository)
 
-This repository is dedicated to hosting public releases for the AIVM CLI project. It is not intended to contain source code.
+This repository is dedicated to hosting public releases for the AIVM project. It is not intended to contain source code.
 
 - Purpose: Publish release artifacts (binaries, checksums) and release notes.
-- Source code lives in: https://github.com/aivm-chaingpt/aivm-cli
+- Source code lives in: https://github.com/aivm-chaingpt/aivm
 - Releases are created automatically by CI from the upstream repository.
 
 ## What you will find here
@@ -21,13 +21,13 @@ This repository is dedicated to hosting public releases for the AIVM CLI project
 
 ## How releases are produced
 
-Releases in this repository are published by the CI pipeline of the upstream `aivm-cli` project. The workflow attaches binaries and checksums and generates release notes automatically. Manual commits to this repository are generally not required.
+Releases in this repository are published by the CI pipeline of the upstream `aivm` project. The workflow attaches binaries and checksums and generates release notes automatically. Manual commits to this repository are generally not required.
 
 ## Filing issues / requests
 
 Please open issues and feature requests in the upstream repository:
 
-- Upstream: https://github.com/aivm-chaingpt/aivm-cli
+- Upstream: https://github.com/aivm-chaingpt/aivm
 
 ## Contributions
 
